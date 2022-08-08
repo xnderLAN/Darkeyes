@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block main %}
+  <main>
+    <link href="{{ url_for('static', filename='css/panel.css') }}" rel="stylesheet">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Darkeyes</h1>
+        <p class="fs-5 text-muted">Identity thieves can buy or sell your personal information on hard-to-find dark web sites and forums. Darkeys searches the dark web and notifies you should your information be found.</p>
+      </div>
+      <hr class="my-4">
+      <div class="b-example-divider"></div>
+      <div class="container">
+        <div class="row">
+            
+        {% for darky in darkeys %}
+            {% if darky.caps %}
+            {% set intervale = date - darky.caps[-1].date %} 
+             {% set days = intervale.days | int %}
+            <div class="col-lg-4">
+                <div class="card card-margin">
+                    <div class="card-header no-border">
+                        <h5 class="card-title">{{ darky.name }}</h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                {% if days < 1 %}
+                                    <div class="widget-49-date-warning">
+                                {% else %}
+                                    <div class="widget-49-date-success">
+                                {% endif %}
+                                    <span class="widget-49-date-day">{{ darky.caps[-1].date.day }}</span>
+                                    <span class="widget-49-date-month">{{ darky.caps[-1].date.month }}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">{{ darky.type }} : {{ darky.network }}</span>
+                                    <span class="widget-49-meeting-time">{{ darky.caps[-1].date.hour }}:{{ darky.caps[-1].date.minute }}</span>
+                                </div>
+                            </div>
+                            <ol class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span><a href="{{ darky.onion }}">Onion URL</a></span></li>
+                                <li class="widget-49-meeting-item"><span>Size: {{ darky.caps[-1].lenght }}</span></li>
+                                
+                            </ol>
+                            <div class="widget-49-meeting-action">
+                                <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         {% endif %}   
+    {% endfor %}
+        </div>
+        </div>
+
+  </main>
+
+{% endblock %}

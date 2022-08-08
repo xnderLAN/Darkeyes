@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="col-md-4 col-lg-12">
+  <form class="needs-validation" method="post" action="/isphish" novalidate="">
+    <div class="row g-3">
+
+      <div class="col-md-4">
+        <label for="country" class="form-label">Scan Methode</label>
+        <select class="form-select" name="methode" id="country" required="">
+          <option value="">Choose...</option>
+          <option value="cuntry">Cuntry Code</option>
+          <option value="url">Url Search</option>
+          <option value="word">Match Word</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid Methode.
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <label for="firstName" class="form-label">Suspect URL</label>
+        <input type="text" name="stdin" class="form-control" id="firstName" placeholder="" value="" required="">
+        <div class="invalid-feedback">
+          Valid URL is required.
+        </div>
+      </div>
+    </div>
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg" type="submit">Scan Phish</button>
+    <hr class="my-4">
+  </form>
+</div>
+
+
+<div class="table-responsive">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th style="width: 50%;"></th>
+          <th style="width: 35%;">Track Alert</th>
+          <th style="width: 15%;">Delet</th>
+        </tr>
+      </thead>
+
+      <tbody>
+    {% for url in urls %}
+        <tr>
+          <td scope="row" class="text-start">{{ url.url[:50] }}</th>
+          <td>{{ url.date }}</td>
+          <td><a href="/del/phishing/{{ url.id }}">Delet</a></td>
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <nav aria-label="Standard pagination example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="/phishing/1" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="/phishing/1">1</a></li>
+        <li class="page-item"><a class="page-link" href="/phishing/2">2</a></li>
+        <li class="page-item"><a class="page-link" href="/phishing/3">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="/phishing/10" aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    </div>
+{% endblock %}

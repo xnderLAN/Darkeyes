@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block main %}
+  <main>
+    <link href="{{ url_for('static', filename='css/panel.css') }}" rel="stylesheet">
+
+      <hr class="my-4">
+      <div class="b-example-divider"></div>
+      <div class="container">
+        <div class="row">
+            
+        {% for phish in phishings%}
+            <div class="col-lg-4">
+                <div class="card card-margin">
+                    <div class="card-header no-border">
+                        <h5 class="card-title">{{ phish['title'] }}</h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-warning">
+                                    <span class="widget-49-date-day">{{ phish['date'].split("T")[0].split("-")[2] }}</span>
+                                    <span class="widget-49-date-month">{{ phish['date'].split("T")[0].split("-")[1] }}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">{{ phish['countryname'] }} : {{ phish['regionname']}}</span>
+                                    <span class="widget-49-meeting-time">{{ phish['date'].split("T")[1].split(":")[0] }}:{{ phish['date'].split("T")[1].split(":")[1] }}</span>
+                                </div>
+                            </div>
+                            <ol class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span><a href="{{ phish['url'] }}">{{ phish['domain'] }}</a></span></li>
+                                <li class="widget-49-meeting-item"><span>Host: {{ phish['host'] }}</span></li>
+                                <li class="widget-49-meeting-item"><span>ISP: {{ phish['isp'] }}</span></li>
+                            </ol>
+                            <div class="widget-49-meeting-action">
+                                <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+    {% endfor %}
+        </div>
+        </div>
+
+  </main>
+
+{% endblock %}
