@@ -12,8 +12,8 @@ def create_app():
 
     app.config['MONGODB_SETTINGS'] = {
         'connect': False,
-        'host': 'mongodb://127.0.0.1:27017/Darky',
-        #'host': 'mongodb://db:27017/Darky'
+        #'host': 'mongodb://127.0.0.1:27017/Darky',
+        'host': 'mongodb://db:27017/Darky'
     }
     
     db.init_app(app)
